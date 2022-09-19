@@ -34,9 +34,11 @@ public class UserController {
                     @ApiResponse(description = "User book",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                                     schema = @Schema(implementation = UserBookResponse.class)))})
+
     public UserBookResponse createUserWithBooks(@RequestBody UserBookRequest request,
                                                 @RequestHeader(RQID) @Pattern(regexp = REQUEST_ID_PATTERN) final String requestId) {
         UserBookResponse response = userDataFacade.createUserWithBooks(request);
+
         log.info("Response with created user and his books: {}", response);
         return response;
     }

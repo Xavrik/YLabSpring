@@ -2,11 +2,15 @@ package com.edu.ulab.app.facade;
 
 import com.edu.ulab.app.dto.BookDto;
 import com.edu.ulab.app.dto.UserDto;
+import com.edu.ulab.app.entity.Book;
+import com.edu.ulab.app.entity.User;
 import com.edu.ulab.app.exception.NotFoundException;
 import com.edu.ulab.app.mapper.BookMapper;
 import com.edu.ulab.app.mapper.UserMapper;
 import com.edu.ulab.app.service.BookService;
 import com.edu.ulab.app.service.UserService;
+import com.edu.ulab.app.storage.Storage;
+import com.edu.ulab.app.web.request.BookRequest;
 import com.edu.ulab.app.web.request.UserBookRequest;
 import com.edu.ulab.app.web.response.UserBookResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -60,10 +64,24 @@ public class UserDataFacade {
     }
 
     public UserBookResponse updateUserWithBooks(UserBookRequest userBookRequest) {
-        return null;
+        log.info("Got user book update request: {}", userBookRequest);
+        UserDto userDto = userMapper.userRequestToUserDto(userBookRequest.getUserRequest());
+        UserDto updateUser = userService.updateUser(userDto);
+        log.info("Mapped user request: {}", userDto);
+
+
+
+
+        return UserBookResponse.builder()
+                .userId(updateUser.getId())
+
+                .build();
     }
 
     public UserBookResponse getUserWithBooks(Long userId) {
+
+
+
         return null;
     }
 
